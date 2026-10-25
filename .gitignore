@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
+.DS_Store
+config.json
+.env
+*.log
+*_master.ipynb
+*.pptx
+SuperKart.csv
+.build_solution.py
+.finish_observations.py
+

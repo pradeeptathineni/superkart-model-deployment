@@ -1,0 +1,14 @@
+{
+  "name": "SuperKart Deployment",
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "forwardPorts": [7860, 8501],
+  "portsAttributes": {
+    "7860": {"label": "SuperKart API", "onAutoForward": "silent"},
+    "8501": {"label": "SuperKart UI", "onAutoForward": "openBrowser"}
+  },
+  "postCreateCommand": "docker compose up --build -d --wait",
+  "shutdownAction": "stopContainer"
+}

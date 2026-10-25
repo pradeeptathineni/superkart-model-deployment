@@ -8,6 +8,5 @@ config.json
 *.log
 *_master.ipynb
 *.pptx
-SuperKart.csv
 .build_solution.py
 .finish_observations.py

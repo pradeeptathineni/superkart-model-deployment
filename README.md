@@ -37,9 +37,10 @@ The SSH feature allows GitHub CLI to inspect container status during deployment.
 
 ## Run the notebook
 
-The original SuperKart.csv belongs beside the notebook; it remains local rather
-than being republished in this deployment repository. Batch_Data_SuperKart.csv
-contains the ten supplied inference examples.
+Both supplied CSV files belong beside the notebook and are included in the private
+repository. SuperKart.csv is used for training, and Batch_Data_SuperKart.csv
+contains the ten supplied inference examples. The course masters stay unchanged
+in the original project folder.
 
 ```sh
 python3.12 -m venv .venv

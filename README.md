@@ -30,6 +30,10 @@ the two services with Docker Compose. Open forwarded port 8501 for the app.
 Set port 7860 to Public in the Ports panel when an external notebook needs to
 call the API. The forwarded addresses work only while the Codespace is running.
 
+The dev-container image removes an unused Yarn package source whose missing
+signing key prevented Docker setup. Package signature verification remains
+enabled; this Python project does not use Yarn.
+
 ## Run the notebook
 
 The original SuperKart.csv belongs beside the notebook; it remains local rather
@@ -91,4 +95,3 @@ are saved in results/.
 Course masters remain unchanged. Changes to supplied code are explained in
 comments and in the plain bullet notes below the corresponding notebook cells.
 Public comparison sources and exact revisions are recorded in solution-links.txt.
-

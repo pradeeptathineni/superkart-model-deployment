@@ -84,7 +84,8 @@ if uploaded_file is not None and st.button("Predict for Batch", type="primary"):
             results = response.json()
             # Map each numbered result back to its original CSV row
             batch_results = pd.read_csv(io.BytesIO(content))
-            batch_results["Predicted_Sales"] = [results[str(i)] for i in range(len(batch_results))]
+            # Put the prediction first so it is visible before horizontal scrolling
+            batch_results.insert(0, "Predicted_Sales", [results[str(i)] for i in range(len(batch_results))])
             st.success(f"Predictions completed for {len(batch_results)} products.")
             for warning in json.loads(response.headers.get("X-SuperKart-Warnings", "[]")):
                 st.warning(warning)

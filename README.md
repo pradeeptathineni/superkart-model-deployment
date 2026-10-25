@@ -1,10 +1,10 @@
 # SuperKart model deployment
 
 Estimate revenue for a product-store record using the supplied SuperKart data.
-The completed notebook follows the Great Learning / UT Austin McCombs course
-workflow: inspect the data, explore revenue patterns, prepare features, compare
-and tune Random Forest and XGBoost, save the selected pipeline, and serve it
-through Flask and Streamlit in separate Docker containers.
+The notebook covers data inspection, revenue patterns, feature preparation,
+Random Forest and XGBoost evaluation, and hyperparameter tuning. The selected
+pipeline is saved and served through Flask and Streamlit in separate Docker
+containers.
 
 The dataset has no dates, quarter labels, or stated currency. Predictions use
 the original revenue units and observation period. A next-quarter forecast
@@ -45,8 +45,7 @@ The SSH feature allows GitHub CLI to inspect container status during deployment.
 
 Both supplied CSV files belong beside the notebook and are included in the private
 repository. SuperKart.csv is used for training, and Batch_Data_SuperKart.csv
-contains the ten supplied inference examples. The course masters stay unchanged
-in the original project folder.
+contains the ten supplied inference examples.
 
 ```sh
 python3.12 -m venv .venv
@@ -70,17 +69,17 @@ The notebook records whether it actually used local Docker or a forwarded URL.
 The ten input columns are Product_Weight, Product_Sugar_Content,
 Product_Allocated_Area, Product_MRP, Store_Size, Store_Location_City_Type,
 Store_Type, Product_Id_char, Store_Age_Years, and Product_Type_Category.
-Store age uses the fixed 2025 reference year from the course notebook.
+Store age uses a fixed 2025 reference year for both training and prediction.
 
 - GET /health checks whether the API loaded its model.
 - POST /v1/predict accepts one JSON object and returns a numeric Sales value.
 - POST /v1/predictbatch accepts a multipart CSV in the file field and returns
-  the course's row-indexed prediction dictionary.
+  a row-indexed prediction dictionary.
 
 The API rejects missing columns, invalid numeric inputs, and empty categories.
 Unknown categories are processed by the encoder and reported for review.
 The batch response carries category warnings in its X-SuperKart-Warnings
-header, preserving the course's prediction-response shape.
+header, keeping warnings separate from the numbered predictions.
 
 The supplied batch contains Supermarket Type3, which was not present during
 training. It also combines store attributes in ways not represented by the four
@@ -110,6 +109,6 @@ Google Chrome; CHROME_EXECUTABLE can select another compatible browser.
 .venv/bin/python tests/check_frontend.py
 ```
 
-Course masters remain unchanged. Changes to supplied code are explained in
-comments and in the plain bullet notes below the corresponding notebook cells.
-Public comparison sources and exact revisions are recorded in solution-links.txt.
+The notebook records single and batch predictions, model metrics, and browser
+checks. Inactive lines marked CHANGED or DEPRECATED explain why an alternative
+was kept or replaced.

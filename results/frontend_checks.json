@@ -1,6 +1,6 @@
 {
-  "frontend_url": "https://superkart-deployment-pj6wp64jxg727xpw-8501.app.github.dev",
-  "single_result": "Predicted Product Store Sales Total: 2,909.65",
+  "frontend_url": "http://127.0.0.1:8501",
+  "single_result": "Predicted Product Store Sales Total: 3,880.57",
   "batch_rows": 10,
   "unseen_category_warning": true,
   "download_matches_api": true,

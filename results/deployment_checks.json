@@ -1,5 +1,5 @@
 {
-  "backend_url": "https://superkart-deployment-pj6wp64jxg727xpw-7860.app.github.dev",
+  "backend_url": "http://127.0.0.1:7860",
   "passed": 17,
   "checks": [
     "model health",

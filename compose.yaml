@@ -1,27 +1,36 @@
+# Keep the API and page together as one Docker project
 name: superkart
 
 services:
+  # Load the saved model in the Flask service
   backend:
     build: ./backend_files
+    # Make the prediction API reachable on port 7860
     ports:
       - "7860:7860"
+    # Wait until the model has loaded before declaring the API healthy
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:7860/health', timeout=5)"]
       interval: 10s
       timeout: 6s
       retries: 6
       start_period: 15s
+    # Recover from a process failure unless the service was deliberately stopped
     restart: unless-stopped
 
+  # Serve the input form and CSV uploader separately from the model
   frontend:
     build: ./frontend_files
     ports:
       - "8501:8501"
+    # Docker resolves the backend service name inside the shared network
     environment:
       BACKEND_URL: http://backend:7860
+    # Start the page only after its prediction service is ready
     depends_on:
       backend:
         condition: service_healthy
+    # Check Streamlit's own health endpoint
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8501/_stcore/health', timeout=5)"]
       interval: 10s

@@ -121,10 +121,18 @@ if uploaded_file is not None:
                 for warning in json.loads(response.headers.get("X-SuperKart-Warnings", "[]")):
                     st.warning(warning)
 
-                # Check if all values are scalars
                 # DEPRECATED: generic list/nested-dict branches; this API returns numbered scalar values
-                # if all(not isinstance(v, (list, dict)) for v in results.values()):
-                # df = pd.DataFrame([results])  # This puts every prediction across one row
+                # if isinstance(results, list):
+                #     df = pd.DataFrame(results)
+                # elif isinstance(results, dict):
+                #     # Check if all values are scalars
+                #     if all(not isinstance(v, (list, dict)) for v in results.values()):
+                #         df = pd.DataFrame([results])
+                #     else:
+                #         df = pd.DataFrame(results)
+                # else:
+                #     df = pd.DataFrame({"Result": [results]})
+
                 # CHANGED: attach each prediction to its input row and show sales first
                 try:
                     df = pd.read_csv(io.BytesIO(uploaded_file.getvalue()))

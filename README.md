@@ -33,6 +33,7 @@ call the API. The forwarded addresses work only while the Codespace is running.
 The dev-container image removes an unused Yarn package source whose missing
 signing key prevented Docker setup. Package signature verification remains
 enabled; this Python project does not use Yarn.
+The SSH feature allows GitHub CLI to inspect container status during deployment.
 
 ## Run the notebook
 

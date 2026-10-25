@@ -8,5 +8,3 @@ config.json
 *.log
 *_master.ipynb
 *.pptx
-.build_solution.py
-.finish_observations.py

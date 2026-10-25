@@ -1,0 +1,23 @@
+{
+  "backend_url": "https://superkart-deployment-pj6wp64jxg727xpw-7860.app.github.dev",
+  "passed": 17,
+  "checks": [
+    "model health",
+    "single request",
+    "single prediction matches saved pipeline",
+    "batch request",
+    "all ten batch rows returned",
+    "batch predictions preserve row order and match saved pipeline",
+    "unseen batch category reported",
+    "missing column rejected",
+    "negative weight rejected",
+    "invalid area rejected",
+    "invalid number rejected",
+    "empty category rejected",
+    "fractional store age rejected",
+    "wrong JSON shape rejected",
+    "missing upload rejected",
+    "empty CSV rejected",
+    "unknown category is visible"
+  ]
+}

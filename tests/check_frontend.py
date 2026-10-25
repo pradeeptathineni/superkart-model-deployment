@@ -13,7 +13,10 @@ from playwright.sync_api import sync_playwright
 root = Path(__file__).resolve().parents[1]
 url = os.environ.get("FRONTEND_URL", "http://127.0.0.1:8501").rstrip("/")
 api_url = os.environ.get("MODEL_ROOT_URL", "http://127.0.0.1:7860").rstrip("/")
-chrome = os.environ.get("CHROME_EXECUTABLE", "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
+chrome = os.environ.get("CHROME_EXECUTABLE")
+mac_chrome = Path("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
+if chrome is None and mac_chrome.exists():
+    chrome = str(mac_chrome)
 results = root / "results"
 results.mkdir(exist_ok=True)
 
@@ -21,6 +24,10 @@ with sync_playwright() as browser_tools:
     browser = browser_tools.chromium.launch(headless=True, executable_path=chrome)
     page = browser.new_page(viewport={"width": 1280, "height": 1000})
     page.goto(url, wait_until="networkidle")
+    # GitHub asks first-time visitors to confirm the forwarded development port
+    if page.title() == "Codespaces Access Port":
+        page.get_by_text("Continue", exact=True).click()
+        page.wait_for_load_state("networkidle")
     page.get_by_role("heading", name="SuperKart System", exact=True).wait_for()
     page.get_by_role("button", name="Predict", exact=True).click()
     success = page.get_by_text("Predicted Product Store Sales Total:", exact=False)

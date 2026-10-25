@@ -25,6 +25,12 @@ repository. No API key is required to run inference.
 
 ## GitHub Codespaces
 
+[Open the deployed app](https://superkart-deployment-pj6wp64jxg727xpw-8501.app.github.dev)
+or [open the Codespace](https://superkart-deployment-pj6wp64jxg727xpw.github.dev).
+The API is at https://superkart-deployment-pj6wp64jxg727xpw-7860.app.github.dev.
+GitHub may show a Continue page on the first app visit. The Codespace is set to
+stop after 30 minutes of inactivity; reopen it before using these URLs again.
+
 Create a Codespace from this repository. The dev-container configuration starts
 the two services with Docker Compose. Open forwarded port 8501 for the app.
 Set port 7860 to Public in the Ports panel when an external notebook needs to
@@ -93,6 +99,16 @@ verifies row order, checks the unknown-category warning, and exercises invalid
 requests. The notebook also verifies that saving and reloading the pipeline
 leaves predictions unchanged. Model comparison tables and batch predictions
 are saved in results/.
+
+For the optional browser check, install Playwright and its Chromium browser,
+then run tests/check_frontend.py. On this Mac the check uses the installed
+Google Chrome; CHROME_EXECUTABLE can select another compatible browser.
+
+```sh
+.venv/bin/python -m pip install playwright==1.64.1
+.venv/bin/python -m playwright install chromium
+.venv/bin/python tests/check_frontend.py
+```
 
 Course masters remain unchanged. Changes to supplied code are explained in
 comments and in the plain bullet notes below the corresponding notebook cells.

@@ -41,6 +41,9 @@ with sync_playwright() as browser_tools:
     page.get_by_role("button", name="Predict for Batch", exact=True).click()
     page.get_by_text("Predictions completed for 10 products.", exact=True).wait_for(timeout=60000)
     page.get_by_text("Store_Type was not seen in training: Supermarket Type3", exact=True).wait_for()
+    # The cloud page can show its download button before the table finishes painting
+    page.get_by_test_id("stDataFrame").locator("canvas").first.wait_for(state="visible", timeout=60000)
+    page.wait_for_load_state("networkidle")
     page.get_by_role("button", name="Download predictions", exact=True).scroll_into_view_if_needed()
     page.screenshot(path=str(results / "frontend_batch.png"))
     with page.expect_download() as download_info:
